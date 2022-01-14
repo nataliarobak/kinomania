@@ -16,7 +16,6 @@ public class Hall {
         stats = new int[daysAmount];
 
         for (int i = 0; i < daysAmount; i++) {
-            System.out.println("abcd");
             this.freeSeatsNumber[i] = freeSeats;
             moviesPlayed[i] = null;
         }
@@ -24,24 +23,44 @@ public class Hall {
 
     public void addMovie(int dayNumber, Movie m) {
         moviesPlayed[dayNumber] = m;
+        //System.out.println("Wpisuje film " + m.title + " do " + moviesPlayed[dayNumber].title + " dnia " + dayNumber); //dobrze
     }
 
     public boolean sellTickets(int howManyTickets, Movie whatMovie, int dayNumber) {
+        if (moviesPlayed[dayNumber] == null) return false;
         if (whatMovie != moviesPlayed[dayNumber]) {
+            System.out.println("fałszz" + whatMovie.title + " day " + dayNumber); //+ moviesPlayed[dayNumber].title); - tu jest null :o
             return false;
         }
         if (freeSeatsNumber[dayNumber] - howManyTickets < 0) {
+            System.out.println("fałsz nr 2");
             freeSeatsNumber[dayNumber] -= howManyTickets;
             return false;
         }
-        statistics(dayNumber );
+        //statistics(dayNumber);
+        System.out.println("true");
         return true;
     }
 
+    public int statistics(int dayNumber) {
+        if (moviesPlayed[dayNumber] != null) {
+            System.out.println(totalSeatsNumber - freeSeatsNumber[dayNumber]);
+            return totalSeatsNumber - freeSeatsNumber[dayNumber];
+        } else {
+        System.out.println("zero" + 0);
+        return 0; }
+    }
+
+/*
     public void statistics(int dayNumber) {
         if (moviesPlayed[dayNumber] != null) {
             stats[dayNumber] += totalSeatsNumber - freeSeatsNumber[dayNumber];
+            System.out.println(totalSeatsNumber - freeSeatsNumber[dayNumber]);
+            System.out.println(stats[dayNumber]);
         }
-        else stats[dayNumber] = 0;
+        else {
+            System.out.println(0);
+            stats[dayNumber] = 0; }
     }
+ */
 }
