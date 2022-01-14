@@ -68,9 +68,9 @@ public class City {
         for (int day = 0; day < howManyDays; day++) {
             for (int cn = 0; cn < cinemasNumber; cn++) {
                 cinemas[cn] = new Cinema(names[cn], addresses[cn], hallsNumbers[cn], seatsArr[cn], howManyDays);
-                for (int hll = 0; hll < hallsNumbers[cn]; hll++) {
+                for (int hll = 0; hll < cinemas[cn].halls.length; hll++) {
                     int randomMovie = randomizer.nextInt(movies.length);
-                    System.out.println("Day " + day + ": cinema " + cinemas[cn].name + "- hall nr " + hll + "- movie "+ movies[randomMovie].title);
+                    //System.out.println("Day " + day + ": cinema " + cinemas[cn].name + "- hall nr " + hll + "- movie "+ movies[randomMovie].title);
                     cinemas[cn].addRepertoire(hll, movies[randomMovie], day);
                 }
             }
@@ -113,6 +113,16 @@ public class City {
  */
     }
 
+    public void writeRep(int howManyDays) {
+        for (int day = 0; day < howManyDays; day++) {
+            for (int cn = 0; cn < cinemas.length; cn++) {
+                for (int hll = 0; hll < cinemas[cn].halls.length; hll++) {
+                    //int randomMovie = randomizer.nextInt(movies.length);
+                    System.out.println("Day " + day + ": cinema " + cinemas[cn].name + "- hall nr " + cinemas[cn].halls[hll].number + "- movie "+ movies[hll].title);
+                    //cinemas[cn].addRepertoire(hll, movies[randomMovie], day);
+                } } }
+    }
+
     public void runSimulation(int howManyDays) {
         for (int day = 0; day < howManyDays; day++) {
             System.out.println("run for day: " + day);
@@ -121,10 +131,11 @@ public class City {
                 if (inhabitants[i].getClass() == Koneser.class) {
                     System.out.println("run for koneser");
                     Movie m = bestMovieInTheCity(day);
-                    System.out.println(m.title);
+                    System.out.println("elelelelelelel");
                     if (m != null) {
                         boolean success = false;
                         int c = 0;
+                        System.out.println("If");
                         while (c < cinemas.length && !success) { //&&?
                             success = cinemas[c].sellTickets(1, day, m);
                             System.out.println("Hello " + cinemas[c].name + " success: " + success);
